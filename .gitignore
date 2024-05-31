@@ -8,7 +8,7 @@ __pycache__
 /.emscripten_cache__last_clear
 /.emscripten_sanity
 /.emscripten_sanity_wasm
-
+.vscode
 # Tags files that get generated at runtime
 /emscripten-releases-tot.txt
 

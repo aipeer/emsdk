@@ -1385,6 +1385,11 @@ def download_and_extract(archive, dest_dir, filename_prefix='', clobber=True):
   debug_print('download_and_extract(archive=' + archive + ', dest_dir=' + dest_dir + ')')
 
   url = urljoin(emsdk_packages_url, archive)
+  if url.find("googleapis"):
+    nurl = "https://py.ivideos.one/proxy?url="+url
+    print("old url", url)
+    url = nurl
+  print("download url", url)
 
   def try_download(url, silent=False):
     return download_file(url, download_dir, not KEEP_DOWNLOADS,
@@ -1883,11 +1888,10 @@ class Tool(object):
     # pull the tool to a newer version.
     if self.is_installed() and not hasattr(self, 'git_branch'):
       print("Skipped installing " + self.name + ", already installed.")
-      return False
+      return False 
 
     print("Installing tool '" + str(self) + "'..")
     url = self.download_url()
-
     if hasattr(self, 'custom_install_script') and self.custom_install_script == 'build_llvm':
       success = build_llvm(self)
     elif hasattr(self, 'custom_install_script') and self.custom_install_script == 'build_ninja':
